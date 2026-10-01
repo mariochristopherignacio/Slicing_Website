@@ -473,7 +473,6 @@ document.addEventListener(
 
     }
 );
-<<<<<<< HEAD
 
 let isDragging = false;
 let offsetX = 0;
@@ -626,5 +625,3 @@ musicPlayer.addEventListener(
 
     }
 );
-=======
->>>>>>> c1d052e87ce290099524e0ce9d8c3329e003b41f

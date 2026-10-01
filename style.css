@@ -548,36 +548,6 @@ body {
     border-color: #ffffff;
 }
 
-.music-player {
-
-    position: fixed;
-
-    right: 25px;
-    bottom: 25px;
-
-    width: 350px;
-
-    padding: 16px;
-
-    background: rgba(15, 15, 15, 0.88);
-
-    border: 1px solid rgba(255, 255, 255, 0.15);
-
-    border-radius: 18px;
-
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-
-    box-shadow:
-        0 20px 60px rgba(0, 0, 0, 0.45);
-
-    z-index: 100;
-
-    transition:
-        width 0.4s ease,
-        padding 0.4s ease;
-}
-
 .music-header {
 
     display: flex;
@@ -907,6 +877,25 @@ body {
 }
 
 .music-player {
+    position: fixed;
+    right: 25px;
+    bottom: 25px;
+
+    width: 350px;
+    padding: 16px;
+
+    background: rgba(15, 15, 15, 0.88);
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    border-radius: 18px;
+
+    backdrop-filter: blur(20px);
+    -webkit-backdrop-filter: blur(20px);
+
+    box-shadow:
+        0 20px 60px rgba(0, 0, 0, 0.45);
+
+    z-index: 100;
+
     cursor: grab;
     user-select: none;
     touch-action: none;
@@ -914,6 +903,8 @@ body {
     transition:
         left 0.5s cubic-bezier(0.22, 1, 0.36, 1),
         top 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        right 0.5s cubic-bezier(0.22, 1, 0.36, 1),
+        bottom 0.5s cubic-bezier(0.22, 1, 0.36, 1),
         width 0.4s ease,
         padding 0.4s ease;
 }
@@ -999,25 +990,6 @@ body {
     color: #999999;
 
     line-height: 1.8;
-}
-
-@media (max-width: 600px) {
-
-    .music-player {
-
-        right: 14px;
-        bottom: 14px;
-
-        width: calc(100% - 28px);
-
-    }
-
-    .music-player.minimized {
-
-        width: 100px;
-
-    }
-
 }
 
 @media (max-width: 800px) {
