@@ -1,7 +1,3 @@
-/* =========================
-   SMOOTH SCROLL
-========================= */
-
 let isScrolling = false;
 
 function smoothScrollTo(target) {
@@ -71,9 +67,6 @@ function smoothScrollTo(target) {
     requestAnimationFrame(animate);
 }
 
-
-/* SEMUA LINK SECTION */
-
 document.addEventListener("click", function (event) {
 
     const link =
@@ -100,11 +93,6 @@ document.addEventListener("click", function (event) {
 
 });
 
-
-/* =========================
-   WALLPAPER SLIDESHOW
-========================= */
-
 const wallpapers = [
 
     "https://i.pinimg.com/736x/c0/7d/c4/c07dc4576d17854a7264c36fad87f2df.jpg",
@@ -122,14 +110,8 @@ const backgroundImage =
 
 let currentWallpaper = 0;
 
-
-/* Wallpaper pertama */
-
 backgroundImage.style.backgroundImage =
     `url("${wallpapers[currentWallpaper]}")`;
-
-
-/* Ganti setiap 8 detik */
 
 setInterval(function () {
 
@@ -143,7 +125,6 @@ setInterval(function () {
 
     backgroundImage.style.opacity = "0";
 
-
     setTimeout(function () {
 
         backgroundImage.style.backgroundImage =
@@ -154,11 +135,6 @@ setInterval(function () {
     }, 700);
 
 }, 8000);
-
-
-/* =========================
-   MUSIC PLAYLIST
-========================= */
 
 const playlist = [
     {
@@ -202,17 +178,7 @@ const playlist = [
     }
 ];
 
-
-/* =========================
-   CURRENT SONG
-========================= */
-
 let currentSong = 0;
-
-
-/* =========================
-   ELEMENT
-========================= */
 
 const audio = document.getElementById("audioPlayer");
 
@@ -242,11 +208,6 @@ const musicPlayer = document.getElementById("musicPlayer");
 
 const minimizeButton = document.getElementById("minimizeMusic");
 
-
-/* =========================
-   LOAD SONG
-========================= */
-
 function loadSong(index) {
 
     const song = playlist[index];
@@ -268,11 +229,6 @@ function loadSong(index) {
     duration.textContent = "0:00";
 }
 
-
-/* =========================
-   PLAY / PAUSE
-========================= */
-
 playButton.addEventListener("click", function () {
 
     if (audio.paused) {
@@ -287,11 +243,6 @@ playButton.addEventListener("click", function () {
 
 });
 
-
-/* =========================
-   WHEN PLAYING
-========================= */
-
 audio.addEventListener("play", function () {
 
     playButton.textContent = "❚❚";
@@ -300,11 +251,6 @@ audio.addEventListener("play", function () {
 
 });
 
-
-/* =========================
-   WHEN PAUSED
-========================= */
-
 audio.addEventListener("pause", function () {
 
     playButton.textContent = "▶";
@@ -312,11 +258,6 @@ audio.addEventListener("pause", function () {
     musicDisc.classList.remove("playing");
 
 });
-
-
-/* =========================
-   AUTO NEXT SONG
-========================= */
 
 audio.addEventListener("ended", function () {
 
@@ -334,11 +275,6 @@ audio.addEventListener("ended", function () {
 
 });
 
-
-/* =========================
-   PREVIOUS SONG
-========================= */
-
 prevButton.addEventListener("click", function () {
 
     currentSong--;
@@ -354,11 +290,6 @@ prevButton.addEventListener("click", function () {
     audio.play();
 
 });
-
-
-/* =========================
-   NEXT SONG
-========================= */
 
 nextButton.addEventListener("click", function () {
 
@@ -376,21 +307,11 @@ nextButton.addEventListener("click", function () {
 
 });
 
-
-/* =========================
-   AUDIO DURATION
-========================= */
-
 audio.addEventListener("loadedmetadata", function () {
 
     duration.textContent = formatTime(audio.duration);
 
 });
-
-
-/* =========================
-   UPDATE PROGRESS
-========================= */
 
 audio.addEventListener("timeupdate", function () {
 
@@ -406,11 +327,6 @@ audio.addEventListener("timeupdate", function () {
 
 });
 
-
-/* =========================
-   CHANGE PROGRESS
-========================= */
-
 progressBar.addEventListener("input", function () {
 
     if (!audio.duration) return;
@@ -420,11 +336,6 @@ progressBar.addEventListener("input", function () {
         audio.duration;
 
 });
-
-
-/* =========================
-   FORMAT TIME
-========================= */
 
 function formatTime(seconds) {
 
@@ -450,11 +361,6 @@ function formatTime(seconds) {
 
 }
 
-
-/* =========================
-   MINIMIZE PLAYER
-========================= */
-
 minimizeButton.addEventListener("click", function () {
 
     musicPlayer.classList.toggle("minimized");
@@ -471,17 +377,7 @@ minimizeButton.addEventListener("click", function () {
 
 });
 
-
-/* =========================
-   FIRST SONG
-========================= */
-
 loadSong(currentSong);
-
-
-/* =========================
-   PROJECT MODAL
-========================= */
 
 const projectModal =
     document.getElementById("projectModal");
@@ -522,7 +418,6 @@ const projects = {
     }
 };
 
-
 document.querySelectorAll(".project-card")
     .forEach(function (card) {
 
@@ -559,7 +454,6 @@ document.querySelectorAll(".project-card")
 
     });
 
-
 function closeModal() {
 
     projectModal.classList.remove(
@@ -567,7 +461,6 @@ function closeModal() {
     );
 
 }
-
 
 modalClose.addEventListener(
     "click",
@@ -586,6 +479,158 @@ document.addEventListener(
         if (event.key === "Escape") {
             closeModal();
         }
+
+    }
+);
+
+let isDragging = false;
+let offsetX = 0;
+let offsetY = 0;
+
+
+musicPlayer.addEventListener("pointerdown", function (event) {
+
+    if (event.target.closest("button, input, a")) {
+        return;
+    }
+
+    isDragging = true;
+
+    const rect =
+        musicPlayer.getBoundingClientRect();
+
+    offsetX =
+        event.clientX - rect.left;
+
+    offsetY =
+        event.clientY - rect.top;
+
+    musicPlayer.classList.add("dragging");
+
+    musicPlayer.style.right = "auto";
+    musicPlayer.style.bottom = "auto";
+
+    musicPlayer.style.left =
+        `${rect.left}px`;
+
+    musicPlayer.style.top =
+        `${rect.top}px`;
+
+    musicPlayer.setPointerCapture(
+        event.pointerId
+    );
+});
+
+musicPlayer.addEventListener("pointermove", function (event) {
+
+    if (!isDragging) return;
+
+    const width =
+        musicPlayer.offsetWidth;
+
+    const height =
+        musicPlayer.offsetHeight;
+
+    let x =
+        event.clientX - offsetX;
+
+    let y =
+        event.clientY - offsetY;
+
+    x = Math.max(
+        0,
+        Math.min(
+            x,
+            window.innerWidth - width
+        )
+    );
+
+    y = Math.max(
+        0,
+        Math.min(
+            y,
+            window.innerHeight - height
+        )
+    );
+
+    musicPlayer.style.left =
+        `${x}px`;
+
+    musicPlayer.style.top =
+        `${y}px`;
+});
+
+musicPlayer.addEventListener("pointerup", function (event) {
+
+    if (!isDragging) return;
+
+    isDragging = false;
+
+    musicPlayer.classList.remove("dragging");
+
+    const rect =
+        musicPlayer.getBoundingClientRect();
+
+    const playerWidth =
+        musicPlayer.offsetWidth;
+
+    const distanceLeft =
+        event.clientX;
+
+    const distanceRight =
+        window.innerWidth -
+        event.clientX;
+
+    let finalX;
+
+    if (distanceLeft < distanceRight) {
+
+        finalX = 20;
+
+    } else {
+
+        finalX =
+            window.innerWidth -
+            playerWidth -
+            20;
+    }
+
+    const finalY = Math.max(
+        0,
+        Math.min(
+            rect.top,
+            window.innerHeight -
+            musicPlayer.offsetHeight -
+            20
+        )
+    );
+
+    musicPlayer.style.right =
+        "auto";
+
+    musicPlayer.style.bottom =
+        "auto";
+
+    musicPlayer.style.left =
+        `${finalX}px`;
+
+    musicPlayer.style.top =
+        `${finalY}px`;
+
+    musicPlayer.releasePointerCapture(
+        event.pointerId
+    );
+});
+
+musicPlayer.addEventListener(
+    "pointercancel",
+    function () {
+
+        isDragging = false;
+
+        musicPlayer.classList.remove(
+            "dragging"
+        );
 
     }
 );
