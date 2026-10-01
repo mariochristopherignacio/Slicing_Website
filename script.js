@@ -1,7 +1,3 @@
-/* =========================
-   SMOOTH SCROLL
-========================= */
-
 let isScrolling = false;
 
 function smoothScrollTo(target) {
@@ -26,7 +22,6 @@ function smoothScrollTo(target) {
 
     let startTime = null;
 
-
     function animate(currentTime) {
 
         if (startTime === null) {
@@ -39,7 +34,6 @@ function smoothScrollTo(target) {
         const progress =
             Math.min(elapsed / duration, 1);
 
-
         const easing =
             progress < 0.5
                 ? 4 * progress * progress * progress
@@ -49,12 +43,10 @@ function smoothScrollTo(target) {
                       3
                   ) / 2;
 
-
         window.scrollTo(
             0,
             start + distance * easing
         );
-
 
         if (progress < 1) {
 
@@ -67,12 +59,8 @@ function smoothScrollTo(target) {
         }
     }
 
-
     requestAnimationFrame(animate);
 }
-
-
-/* SEMUA LINK SECTION */
 
 document.addEventListener("click", function (event) {
 
@@ -81,29 +69,21 @@ document.addEventListener("click", function (event) {
 
     if (!link) return;
 
-
     const id =
         link.getAttribute("href");
 
     if (!id || id === "#") return;
-
 
     const target =
         document.querySelector(id);
 
     if (!target) return;
 
-
     event.preventDefault();
 
     smoothScrollTo(target);
 
 });
-
-
-/* =========================
-   WALLPAPER SLIDESHOW
-========================= */
 
 const wallpapers = [
 
@@ -122,14 +102,8 @@ const backgroundImage =
 
 let currentWallpaper = 0;
 
-
-/* Wallpaper pertama */
-
 backgroundImage.style.backgroundImage =
     `url("${wallpapers[currentWallpaper]}")`;
-
-
-/* Ganti setiap 8 detik */
 
 setInterval(function () {
 
@@ -143,7 +117,6 @@ setInterval(function () {
 
     backgroundImage.style.opacity = "0";
 
-
     setTimeout(function () {
 
         backgroundImage.style.backgroundImage =
@@ -154,11 +127,6 @@ setInterval(function () {
     }, 700);
 
 }, 8000);
-
-
-/* =========================
-   MUSIC PLAYLIST
-========================= */
 
 const playlist = [
     {
@@ -202,17 +170,7 @@ const playlist = [
     }
 ];
 
-
-/* =========================
-   CURRENT SONG
-========================= */
-
 let currentSong = 0;
-
-
-/* =========================
-   ELEMENT
-========================= */
 
 const audio = document.getElementById("audioPlayer");
 
@@ -242,11 +200,6 @@ const musicPlayer = document.getElementById("musicPlayer");
 
 const minimizeButton = document.getElementById("minimizeMusic");
 
-
-/* =========================
-   LOAD SONG
-========================= */
-
 function loadSong(index) {
 
     const song = playlist[index];
@@ -268,11 +221,6 @@ function loadSong(index) {
     duration.textContent = "0:00";
 }
 
-
-/* =========================
-   PLAY / PAUSE
-========================= */
-
 playButton.addEventListener("click", function () {
 
     if (audio.paused) {
@@ -287,11 +235,6 @@ playButton.addEventListener("click", function () {
 
 });
 
-
-/* =========================
-   WHEN PLAYING
-========================= */
-
 audio.addEventListener("play", function () {
 
     playButton.textContent = "❚❚";
@@ -300,11 +243,6 @@ audio.addEventListener("play", function () {
 
 });
 
-
-/* =========================
-   WHEN PAUSED
-========================= */
-
 audio.addEventListener("pause", function () {
 
     playButton.textContent = "▶";
@@ -312,11 +250,6 @@ audio.addEventListener("pause", function () {
     musicDisc.classList.remove("playing");
 
 });
-
-
-/* =========================
-   AUTO NEXT SONG
-========================= */
 
 audio.addEventListener("ended", function () {
 
@@ -334,11 +267,6 @@ audio.addEventListener("ended", function () {
 
 });
 
-
-/* =========================
-   PREVIOUS SONG
-========================= */
-
 prevButton.addEventListener("click", function () {
 
     currentSong--;
@@ -354,11 +282,6 @@ prevButton.addEventListener("click", function () {
     audio.play();
 
 });
-
-
-/* =========================
-   NEXT SONG
-========================= */
 
 nextButton.addEventListener("click", function () {
 
@@ -376,21 +299,11 @@ nextButton.addEventListener("click", function () {
 
 });
 
-
-/* =========================
-   AUDIO DURATION
-========================= */
-
 audio.addEventListener("loadedmetadata", function () {
 
     duration.textContent = formatTime(audio.duration);
 
 });
-
-
-/* =========================
-   UPDATE PROGRESS
-========================= */
 
 audio.addEventListener("timeupdate", function () {
 
@@ -406,11 +319,6 @@ audio.addEventListener("timeupdate", function () {
 
 });
 
-
-/* =========================
-   CHANGE PROGRESS
-========================= */
-
 progressBar.addEventListener("input", function () {
 
     if (!audio.duration) return;
@@ -420,11 +328,6 @@ progressBar.addEventListener("input", function () {
         audio.duration;
 
 });
-
-
-/* =========================
-   FORMAT TIME
-========================= */
 
 function formatTime(seconds) {
 
@@ -450,11 +353,6 @@ function formatTime(seconds) {
 
 }
 
-
-/* =========================
-   MINIMIZE PLAYER
-========================= */
-
 minimizeButton.addEventListener("click", function () {
 
     musicPlayer.classList.toggle("minimized");
@@ -471,17 +369,7 @@ minimizeButton.addEventListener("click", function () {
 
 });
 
-
-/* =========================
-   FIRST SONG
-========================= */
-
 loadSong(currentSong);
-
-
-/* =========================
-   PROJECT MODAL
-========================= */
 
 const projectModal =
     document.getElementById("projectModal");
@@ -522,7 +410,6 @@ const projects = {
     }
 };
 
-
 document.querySelectorAll(".project-card")
     .forEach(function (card) {
 
@@ -536,7 +423,6 @@ document.querySelectorAll(".project-card")
                     ];
 
                 if (!project) return;
-
 
                 modalTitle.textContent =
                     project.title;
@@ -559,7 +445,6 @@ document.querySelectorAll(".project-card")
 
     });
 
-
 function closeModal() {
 
     projectModal.classList.remove(
@@ -567,7 +452,6 @@ function closeModal() {
     );
 
 }
-
 
 modalClose.addEventListener(
     "click",
