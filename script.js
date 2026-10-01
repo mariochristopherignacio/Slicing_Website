@@ -22,7 +22,6 @@ function smoothScrollTo(target) {
 
     let startTime = null;
 
-
     function animate(currentTime) {
 
         if (startTime === null) {
@@ -35,7 +34,6 @@ function smoothScrollTo(target) {
         const progress =
             Math.min(elapsed / duration, 1);
 
-
         const easing =
             progress < 0.5
                 ? 4 * progress * progress * progress
@@ -45,12 +43,10 @@ function smoothScrollTo(target) {
                       3
                   ) / 2;
 
-
         window.scrollTo(
             0,
             start + distance * easing
         );
-
 
         if (progress < 1) {
 
@@ -63,7 +59,6 @@ function smoothScrollTo(target) {
         }
     }
 
-
     requestAnimationFrame(animate);
 }
 
@@ -74,18 +69,15 @@ document.addEventListener("click", function (event) {
 
     if (!link) return;
 
-
     const id =
         link.getAttribute("href");
 
     if (!id || id === "#") return;
 
-
     const target =
         document.querySelector(id);
 
     if (!target) return;
-
 
     event.preventDefault();
 
@@ -432,7 +424,6 @@ document.querySelectorAll(".project-card")
 
                 if (!project) return;
 
-
                 modalTitle.textContent =
                     project.title;
 
@@ -482,6 +473,7 @@ document.addEventListener(
 
     }
 );
+<<<<<<< HEAD
 
 let isDragging = false;
 let offsetX = 0;
@@ -634,3 +626,5 @@ musicPlayer.addEventListener(
 
     }
 );
+=======
+>>>>>>> c1d052e87ce290099524e0ce9d8c3329e003b41f
